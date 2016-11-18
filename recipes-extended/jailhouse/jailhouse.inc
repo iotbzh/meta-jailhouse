@@ -21,7 +21,6 @@ export LDFLAGS=""
 
 do_configure() {
     cp ${STAGING_KERNEL_BUILDDIR}/include/generated/autoconf.h ${S}/hypervisor/include/jailhouse/config.h;
-    sed -i 's/CONFIG_ARM_GIC_V3/CONFIG_ARM_GIC_V2/g' ${S}/hypervisor/include/jailhouse/config.h;
 }
 
 do_compile() {

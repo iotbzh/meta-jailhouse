@@ -9,14 +9,19 @@ DEPENDS = "virtual/kernel"
 
 #Need to be Check/Fix (seems to not work yocto use host package, not yocto native?)
 DEPENDS = "python-mako-native"
+RDEPENDS_${PN} += "python-argparse"
+RDEPENDS_${PN} += "python-mako"
 
 inherit module
 
 EXTRA_OEMAKE_append_arm = " ARCH=arm CROSS_COMPILE=${HOST_PREFIX} "
 EXTRA_OEMAKE_append = " KDIR=${STAGING_KERNEL_DIR} "
 
+export LDFLAGS=""
+
 do_configure() {
     cp ${STAGING_KERNEL_BUILDDIR}/include/generated/autoconf.h ${S}/hypervisor/include/jailhouse/config.h;
+    sed -i 's/CONFIG_ARM_GIC_V3/CONFIG_ARM_GIC_V2/g' ${S}/hypervisor/include/jailhouse/config.h;
 }
 
 do_compile() {

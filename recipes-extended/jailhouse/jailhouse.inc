@@ -9,6 +9,7 @@ DEPENDS = "virtual/kernel"
 
 #Need to be Check/Fix (seems to not work yocto use host package, not yocto native?)
 DEPENDS = "python-mako-native"
+DEPENDS = "make-native"
 RDEPENDS_${PN} += "python-argparse"
 RDEPENDS_${PN} += "python-mako"
 

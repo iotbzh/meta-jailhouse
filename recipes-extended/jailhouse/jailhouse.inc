@@ -15,8 +15,9 @@ RDEPENDS_${PN} += "python-mako"
 
 inherit module
 
-EXTRA_OEMAKE_append_arm = " ARCH=arm CROSS_COMPILE=${HOST_PREFIX} "
+EXTRA_OEMAKE_append = " CROSS_COMPILE=${HOST_PREFIX} "
 EXTRA_OEMAKE_append = " KDIR=${STAGING_KERNEL_DIR} "
+EXTRA_OEMAKE_append = " V=1 "
 
 export LDFLAGS=""
 
@@ -35,6 +36,8 @@ do_install() {
                DEPMOD=echo INSTALL_MOD_PATH="${D}" \
                O=${STAGING_KERNEL_BUILDDIR} \
                install
+    mkdir -p ${D}/${sysconfdir}/bash_completion.d/;
+    cp ${S}/tools/jailhouse-completion.bash ${D}/${sysconfdir}/bash_completion.d/;
 }
 
 PACKAGES =+ " \
@@ -43,6 +46,7 @@ PACKAGES =+ " \
             
             
 FILES_${PN} += "${datadir}/*" 
+FILES_${PN} += "${sysconfdir}/bash_completion.d/jailhouse-completion.bash" 
 FILES_${PN} += "${sbindir}/*" 
 FILES_${PN} += "${libexecdir}/*" 
 

@@ -1,6 +1,6 @@
 require jailhouse.inc
 
-SRCREV = "fbeafd5b3251cec198544865db6d68667548413b"
+SRCREV = "e4fe53ab9bf11c40be4ad521e798fa431a2560d8"
 
 S = "${WORKDIR}/git"
 
